@@ -42,11 +42,9 @@ export default function SearchBar() {
         if (data.url.includes('list') && !isAdvanced) {
             const responce = await getPlaylist(data.url)
             setPlaylist(responce)
-            console.log(responce)
         } else if (data.url.includes('list') && isAdvanced && (data.start < data.end)) {
             const responce = await getPlaylistByParams(data.url, data.start, data.end)
             setPlaylist(responce)
-            console.log(responce)
         } else if (isAdvanced && (data.start > data.end)) {
             console.log("Start value should be less than end value or cannot be equal to end value.")
         } else {
