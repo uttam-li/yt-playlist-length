@@ -7,6 +7,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function parseDuration(duration: string) {
+
+  if( duration === undefined ) return 0;
+
   const match = duration.match(/PT((\d+)H)?((\d+)M)?((\d+)S)?/);
 
   let hours = (match && match[2] ? parseInt(match[2]) : 0);
@@ -31,7 +34,14 @@ export function calculateTotalDuration(seconds: number, format: videoFormat) {
   } else if (format === 'min') {
       return `${minutes}:${remainingSeconds}`;
   } else {
-      console.error('Invalid format');
       return null;
   }
+}
+
+export function chunk(array: any[], size: number) {
+  const chunks = [];
+  for (let i = 0; i < array.length; i += size) {
+    chunks.push(array.slice(i, i + size));
+  }
+  return chunks;
 }

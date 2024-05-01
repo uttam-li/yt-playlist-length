@@ -13,6 +13,7 @@ import { getPlaylist, getPlaylistByParams } from "@/lib/action";
 import { PlaylistItemListResponse } from '@/lib/types'
 import PlaylistResult from "./playlist-result";
 import { SearchIcon } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 const FormSchema = z.object({
     url: z.string().url({ message: "Invalid URL" }),
@@ -26,6 +27,7 @@ export default function SearchBar() {
     const [isAdvanced, setIsAdvanced] = useState<boolean>(false)
     const [isPending, setIsPending] = useState<boolean>(false)
     const [playlist, setPlaylist] = useState<PlaylistItemListResponse>()
+    const { toast } = useToast()
 
     const form = useForm<z.infer<typeof FormSchema>>({
         defaultValues: {
@@ -39,20 +41,41 @@ export default function SearchBar() {
 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
         setIsPending(true)
-        if (data.url.includes('list') && !isAdvanced) {
-            const responce = await getPlaylist(data.url)
-            setPlaylist(responce)
-        } else if (data.url.includes('list') && isAdvanced && (data.start < data.end)) {
-            const responce = await getPlaylistByParams(data.url, data.start, data.end)
-            setPlaylist(responce)
-        } else if (isAdvanced && (data.start > data.end)) {
-            console.log("Start value should be less than end value or cannot be equal to end value.")
+    
+        if (data.url.includes('list')) {
+            if (isAdvanced) {
+                if (data.start >= data.end) {
+                    toast({
+                        title: "Invalid Input",
+                        description: "Start must be less than end.",
+                    })
+                    setIsPending(false)
+                    return
+                }
+            }
+    
+            try {
+                const response = isAdvanced ? 
+                    await getPlaylistByParams(data.url, data.start, data.end) :
+                    await getPlaylist(data.url)
+                setPlaylist(response)
+                setIsPending(false)
+            } catch (error) {
+                toast({
+                    variant: "destructive",
+                    title: "Error",
+                    description: "Failed to fetch playlist. Please check your URL.",
+                })
+                setIsPending(false)
+            }
         } else {
-            console.log(
-                "Invalid URL. Please make sure you are using a valid YouTube playlist URL."
-            )
+            toast({
+                variant: "destructive",
+                title: "Invalid URL",
+                description: "Please enter a valid YouTube playlist URL.",
+            })
+            setIsPending(false)
         }
-        setIsPending(false)
     }
 
     return (

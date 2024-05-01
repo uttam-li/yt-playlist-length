@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { PlaylistItemListResponse, videoFormat, videoSpeed } from '@/lib/types'
 import {
     Card,
@@ -11,10 +9,7 @@ import {
 } from "@/components/ui/card"
 import Image from 'next/image'
 import { calculateTotalDuration, parseDuration } from '@/lib/utils'
-import { parse } from 'path'
-import Link from 'next/link'
-import { ArrowTopRightIcon, Link1Icon } from '@radix-ui/react-icons'
-import { LinkIcon } from 'lucide-react'
+import { ArrowTopRightIcon } from '@radix-ui/react-icons'
 
 export default function VideoCard({ item, format, speed }: { item: PlaylistItemListResponse['items'][0], format: videoFormat, speed: videoSpeed }) {
 
@@ -28,7 +23,7 @@ export default function VideoCard({ item, format, speed }: { item: PlaylistItemL
             <Card className='max-w-[320px] hidden md:block min-h-[310px] relative'>
                 <span className='absolute font-bold bg-primary/80 text-white h-8 w-8 p-1 text-center rounded-full aspect-square dark:bg-white/80 dark:text-black -top-2 -left-2'>{item.index}</span>
                 <CardHeader className='bg-secondary rounded-t-lg p-4 text-center'>
-                    <Image src={item.snippet.thumbnails.medium.url} alt={item.videoTitle} className="object-contain rounded-lg shadow-lg hidden md:block mb-1" width={320} height={180} />
+                    <Image src={item.snippet.thumbnails.medium.url} alt={item.videoTitle} className="object-cover rounded-lg shadow-lg hidden md:block mb-1" width={320} height={180} />
                     <CardTitle>
                         {item.videoTitle}
                     </CardTitle>
@@ -41,7 +36,7 @@ export default function VideoCard({ item, format, speed }: { item: PlaylistItemL
                 <CardFooter className='bg-secondary rounded-b-lg p-2 text-center mt-[-20px]'>
                 <a
                         className="inline-flex items-center gap-x-2 border dark:border-primary/15 text-sm p-1 ps-3 rounded-full transition-all group"
-                        href={`https://youtube.com/watch?v=${item.contentDetails.videoId}&list=${item.id}&index=${item.index}`}
+                        href={`https://youtube.com/watch?v=${item.contentDetails.videoId}&index=${item.index}`}
                     >
                         Link
                         <span className="py-1.5 px-2.5 inline-flex justify-center items-center gap-x-2 rounded-full bg-muted-foreground/15 font-semibold text-sm">
@@ -56,7 +51,7 @@ export default function VideoCard({ item, format, speed }: { item: PlaylistItemL
                     <span className='p-1 pl-4 rounded-md flex-grow overflow-hidden'>{item.videoTitle}</span>
                     <a
                         className="inline-flex items-center gap-x-2 border text-sm p-1 ps-3 rounded-full transition-all group"
-                        href={`https://youtube.com/watch?v=${item.contentDetails.videoId}&list=${item.id}&index=${item.index}`}
+                        href={`https://youtube.com/watch?v=${item.contentDetails.videoId}&index=${item.index}`}
                     >
                         Link
                         <span className="inline-flex justify-center items-center gap-x-2 rounded-full bg-muted-foreground/15 font-semibold text-sm">

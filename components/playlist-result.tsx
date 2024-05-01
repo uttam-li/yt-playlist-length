@@ -7,12 +7,11 @@ import {
     SelectContent,
     SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
 import { Label } from '@radix-ui/react-dropdown-menu';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 
 export default function PlaylistResult({ playlist }: { playlist: PlaylistItemListResponse }) {
 
@@ -107,7 +106,7 @@ export default function PlaylistResult({ playlist }: { playlist: PlaylistItemLis
             <div className='flex flex-wrap gap-4 items-center justify-center'>
                 {playlist && playlist?.items && (
                     playlist.items.map((item) => (
-                        <VideoCard key={item.id} item={item} format={format} speed={speed} />
+                        <VideoCard key={item.etag} item={item} format={format} speed={speed} />
                     ))
                 )}
             </div>

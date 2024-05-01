@@ -54,10 +54,8 @@ interface Status {
 interface Item {
   kind: string;
   etag: string;
-  id: string;
   snippet: Snippet;
   contentDetails: ContentDetails;
-  status: Status;
   videoTitle: string;
   videoThumbnail: string;
   videoDuration: string;
