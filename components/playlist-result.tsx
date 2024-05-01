@@ -26,7 +26,7 @@ export default function PlaylistResult({ playlist }: { playlist: PlaylistItemLis
 
     return (
         <div className="flex flex-col items-center justify-center space-y-6 py-12">
-            <div className='flex flex-col md:flex-row gap-x-10 gap-y-2 '>
+            <div className='flex flex-col md:flex-row gap-x-10 gap-y-2 text-sm md:text-base '>
                 <span className='inline-flex items-center justify-between gap-2'>
                     <Label id='speed' className='font-semibold text-lg'>Format:</Label>
                     <Select onValueChange={(value: videoFormat) => setFormat(value)} defaultValue={format}>
@@ -63,11 +63,11 @@ export default function PlaylistResult({ playlist }: { playlist: PlaylistItemLis
                     </Select>
                 </span>
             </div>
-            <Card className='ring-1 ring-muted-foreground mx-5'>
+            <Card className='mx-5 shadow-xl border-[2px]'>
                 <CardContent className='p-3'>
                     <CardHeader>
                         <CardTitle>
-                            <div className='flex flex-col items-start gap-y-2 leading-5'>
+                            <div className='flex flex-col items-start gap-y-2 leading-5 text-sm md:text-base'>
                                 <div>
                                     Published By:
                                     <span className="pl-2 text-primary font-normal">

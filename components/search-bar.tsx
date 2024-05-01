@@ -14,6 +14,7 @@ import { PlaylistItemListResponse } from '@/lib/types'
 import PlaylistResult from "./playlist-result";
 import { SearchIcon } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { AnimatePresence, motion } from "framer-motion"
 
 const FormSchema = z.object({
     url: z.string().url({ message: "Invalid URL" }),
@@ -41,7 +42,7 @@ export default function SearchBar() {
 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
         setIsPending(true)
-    
+
         if (data.url.includes('list')) {
             if (isAdvanced) {
                 if (data.start >= data.end) {
@@ -53,11 +54,12 @@ export default function SearchBar() {
                     return
                 }
             }
-    
+
             try {
-                const response = isAdvanced ? 
+                const response = isAdvanced ?
                     await getPlaylistByParams(data.url, data.start, data.end) :
                     await getPlaylist(data.url)
+                console.log(response)
                 setPlaylist(response)
                 setIsPending(false)
             } catch (error) {
@@ -114,37 +116,45 @@ export default function SearchBar() {
                             <h4 className="text-sm font-semibold">
                                 Advanced Search
                             </h4>
-                            <Switch checked={isAdvanced} onClick={() => setIsAdvanced(!isAdvanced)} className="" />
+                            <Switch checked={isAdvanced} onClick={() => setIsAdvanced(!isAdvanced)} className="transition-all ease-in-out transform" />
                         </div>
                         {isAdvanced && (
-                            <div className="flex flex-col md:flex-row gap-2 items-start justify-center">
-                                <FormField
-                                    control={form.control}
-                                    name="start"
-                                    render={({ field }) => (
-                                        <FormItem className="">
-                                            <FormLabel className="">Start</FormLabel>
-                                            <FormControl>
-                                                <Input type="number" placeholder="01" {...field} onChange={(e) => form.setValue('start', parseInt(e.target.value))} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="end"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>End</FormLabel>
-                                            <FormControl>
-                                                <Input type="number" placeholder="20" {...field} onChange={(e) => form.setValue('end', parseInt(e.target.value))} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                {/* <FormField
+                            <AnimatePresence>
+
+                                <motion.div
+                                    className="flex flex-col md:flex-row gap-2 items-start justify-center"
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.95 }}
+                                    transition={{ type: "just", damping: 20, stiffness: 100 }}
+                                >
+                                    <FormField
+                                        control={form.control}
+                                        name="start"
+                                        render={({ field }) => (
+                                            <FormItem className="">
+                                                <FormLabel className="">Start</FormLabel>
+                                                <FormControl>
+                                                    <Input type="number" placeholder="01" {...field} onChange={(e) => form.setValue('start', parseInt(e.target.value))} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={form.control}
+                                        name="end"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>End</FormLabel>
+                                                <FormControl>
+                                                    <Input type="number" placeholder="20" {...field} onChange={(e) => form.setValue('end', parseInt(e.target.value))} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    {/* <FormField
                                     control={form.control}
                                     name="maxResult"
                                     render={({ field }) => (
@@ -157,7 +167,8 @@ export default function SearchBar() {
                                         </FormItem>
                                     )}
                                 /> */}
-                            </div>
+                                </motion.div>
+                            </AnimatePresence>
                         )}
                     </div>
                 </form>
