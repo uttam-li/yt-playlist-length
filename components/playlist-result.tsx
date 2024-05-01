@@ -64,31 +64,31 @@ export default function PlaylistResult({ playlist }: { playlist: PlaylistItemLis
                 </span>
             </div>
             <Card className='mx-5 shadow-xl border-[2px]'>
-                <CardContent className='p-3'>
+                <CardContent className='p-1/2 md:p-1'>
                     <CardHeader>
                         <CardTitle>
                             <div className='flex flex-col items-start gap-y-2 leading-5 text-sm md:text-base'>
                                 <div>
                                     Published By:
-                                    <span className="pl-2 text-primary font-normal">
+                                    <span className="pl-2 font-normal">
                                         {playlist.items[0].snippet.videoOwnerChannelTitle}
                                     </span>
                                 </div>
                                 <div>
                                     Total Videos:
-                                    <span className="pl-2 text-primary font-normal">
+                                    <span className="pl-2 font-normal">
                                         {playlist.items.length}
                                     </span>
                                 </div>
                                 <div>
                                     Total Duration:
-                                    <span className="pl-2 text-primary font-normal">
+                                    <span className="pl-2 font-normal">
                                         {totalLength}
                                     </span>
                                 </div>
                                 <div>
                                     Playback Duration &#40;{speed}x&#41; :
-                                    <span className="pl-2 text-primary font-normal">
+                                    <span className="pl-2 font-normal">
                                         {playbackLength}
                                     </span>
                                 </div>

@@ -30,11 +30,15 @@ export function calculateTotalDuration(seconds: number, format: videoFormat) {
   remainingSeconds = Number(String(remainingSeconds).padStart(2, '0'));
   
   if (format === 'hrs') {
-      return `${hours}:${minutes}:${remainingSeconds}`;
+    return `${hours}:${minutes}:${remainingSeconds}`;
   } else if (format === 'min') {
-      return `${minutes}:${remainingSeconds}`;
+    const totalMinutes = (hours * 60) + minutes;
+    return `${totalMinutes}:${remainingSeconds}`;
+  } else if (format === 'sec') {
+    const totalSeconds = (hours * 3600) + (minutes * 60) + remainingSeconds;
+    return `${totalSeconds}`;
   } else {
-      return null;
+    return null;
   }
 }
 
