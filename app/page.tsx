@@ -76,7 +76,7 @@ export default function Home() {
       </div>
 
       {/* Search Section with Enhanced Styling */}
-      <div className="relative px-4 sm:px-6 lg:px-8">
+      <div className="relative px-2 sm:px-6 lg:px-8">
         <SearchBar />
       </div>
     </>

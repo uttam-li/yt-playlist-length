@@ -344,7 +344,7 @@ export default function SearchBar() {
     : [];
 
   return (
-    <div className="space-y-8 max-w-6xl mx-auto px-4 py-8">
+    <div className="space-y-8 max-w-6xl mx-auto py-4">
       {/* Enhanced Search Form */}
       <Card className="overflow-hidden shadow-lg">
         <CardContent className="p-4 sm:p-6">
