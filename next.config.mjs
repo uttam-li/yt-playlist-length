@@ -1,5 +1,8 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
+  swcMinify: false, // This disables the use of native SWC
+  compiler: {
+    swcPlugins: [],  // Empty or fallback-only plugins
+  },
   images: {
     remotePatterns: [
       {
