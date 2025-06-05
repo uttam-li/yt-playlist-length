@@ -88,28 +88,28 @@ importers:
         version: 3.25.51
     devDependencies:
       '@types/node':
-        specifier: ^20
+        specifier: ^20.17.57
         version: 20.17.57
       '@types/react':
-        specifier: ^18
+        specifier: ^18.3.23
         version: 18.3.23
       '@types/react-dom':
-        specifier: ^18
+        specifier: ^18.3.7
         version: 18.3.7(@types/react@18.3.23)
       eslint:
-        specifier: ^8
+        specifier: ^8.57.1
         version: 8.57.1
       eslint-config-next:
         specifier: 14.2.3
         version: 14.2.3(eslint@8.57.1)(typescript@5.8.3)
       postcss:
-        specifier: ^8
+        specifier: ^8.5.4
         version: 8.5.4
       tailwindcss:
-        specifier: ^3.4.1
+        specifier: ^3.4.17
         version: 3.4.17
       typescript:
-        specifier: ^5
+        specifier: ^5.8.3
         version: 5.8.3
 
 packages:
